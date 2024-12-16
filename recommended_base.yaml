@@ -1,0 +1,63 @@
+substitutions:
+  name: deye
+  device_description: "Modbus Deye SUN-5K-SG03LP1EU Reader"
+  modbus_controller_id: sg03lp1
+
+esphome:
+  name: ${name}
+
+# Set pins required for LilyGo T-CAN485 board
+# taken from https://github.com/elupus/esphome-nibe/blob/master/examples/lilygo-t-can485.yaml#L30
+output:
+  - platform: gpio
+    id: ENABLE_PIN # Enable the chip
+    pin:
+      number: GPIO19
+      inverted: true
+  - platform: gpio
+    id: SE_PIN # Enable autodirection
+    pin:
+      number: GPIO17
+      inverted: true
+  - platform: gpio
+    id: ENABLE_5V_PIN # Enable 5V pin for RS485 chip
+    pin:
+      number: GPIO16
+      inverted: true
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  #power_save_mode: none
+
+  ap:
+    ssid: "${name} Fallback AP"
+    password: !secret wifi_fallback_password
+
+captive_portal:
+
+logger:
+  level: INFO
+
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+web_server:
+  port: 80
+
+# by default data is available via the web interface
+# if you use homeassistant you can uncomment below code:
+#api:
+#  password: !secret api_password
+
+# or via MQTT:
+#mqtt:
+#  broker: !secret mqtt_broker
+
+<<: !include deye.yaml
