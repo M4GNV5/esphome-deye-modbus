@@ -1,0 +1,19 @@
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  id: sun5k_Running_Status # Derzeitiger Status des Inverters
+  bitmask: 0
+  register_type: holding
+  address: 59
+  raw_encode: HEXBYTES
+  name: sun5k-Running Status
+  lambda: |-
+    uint16_t value = modbus_controller::word_from_hex_str(x, 0);
+    switch (value) {
+      case 0: return std::string("standby");
+      case 1: return std::string("selfcheck");
+      case 2: return std::string("normal");
+      case 3: return std::string("alarm");
+      case 4: return std::string("fault");
+      default: return std::string("----");
+    }
+    return x;

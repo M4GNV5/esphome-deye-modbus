@@ -1,0 +1,228 @@
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Warning1"
+  id:  sun5k_Warning1
+  register_type: holding
+  address: 101
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Warning2"
+  id:  sun5k_Warning2
+  register_type: holding
+  address: 102
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Fault1"
+  id:  sun5k_Fault1
+  register_type: holding
+  address: 103
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Fault2"
+  id:  sun5k_Fault2
+  register_type: holding
+  address: 104
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Fault3"
+  id:  sun5k_Fault3
+  register_type: holding
+  address: 105
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Fault4"
+  id:  sun5k_Fault4
+  register_type: holding
+  address: 106
+  accuracy_decimals: 0
+  value_type: U_WORD
+
+################################### PV
+################################### Leistungsdaten PV1
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-PV1 Power"  # aktuelle Leistung PV
+  id: sun5k_PV1_Power
+  register_type: holding
+  address: 186
+  state_class: "measurement"
+  unit_of_measurement: "W"
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-daily-production" # leistung PV HEUTE in watt
+  id: sun5k_daily_production
+  register_type: holding
+  address: 108
+  unit_of_measurement: "kWh"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-PV1 Voltage" # aktuelle volt PV1
+  id: sun5k_PV1_Voltage
+  register_type: holding
+  address: 109
+  unit_of_measurement: "V"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-PV1 Current" # aktuelle A PV1
+  id: sun5k_PV1_Current
+  register_type: holding
+  address: 110
+  unit_of_measurement: "A"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-PV2 Voltage" # aktuelle volt PV2
+  id: sun5k_PV2_Voltage
+  register_type: holding
+  address: 111
+  unit_of_measurement: "V"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-PV2 Current" # aktuelle A PV2
+  id: sun5k_PV2_Current
+  register_type: holding
+  address: 112
+  unit_of_measurement: "A"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Total PV Production"
+  id: sun5k_Total_PV_Production
+  register_type: holding
+  address: 96
+  unit_of_measurement: "kWh"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_DWORD_R
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Radiator Temperature"
+  id: sun5k_Radiator_Temperature
+  register_type: holding
+  address: 90
+  unit_of_measurement: "℃"
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  value_type: U_WORD
+
+######################Ende PV Sensoren###########################################
+
+################################ Batterie aktuelle Werte
+- platform: modbus_controller          # 183 Battery Spannung
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Battery-Temperature"
+  id: sun5k_Battery_Temperature
+  register_type: holding
+  address: 182
+  unit_of_measurement: "℃"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  device_class: voltage
+  state_class: measurement
+  value_type: U_WORD
+
+- platform: modbus_controller          # 183 Battery Spannung
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Battery-Voltage"
+  id: sun5k_Battery_Voltage
+  register_type: holding
+  address: 183
+  unit_of_measurement: "V"
+  accuracy_decimals: 2
+  filters:
+    - multiply: 0.01
+  device_class: voltage
+  state_class: measurement
+  value_type: U_WORD
+
+- platform: modbus_controller          # 184 Battery SOC
+  modbus_controller_id:  ${deye_modbus_controller_id}
+  name: "sun5k-Battery-SoC"  #Batterie SoC
+  id: sun5k_Battery_SoC
+  register_type: holding
+  address: 184
+  unit_of_measurement: "%"
+  #accuracy_decimals: 0
+  device_class: battery
+  state_class: measurement
+  filters: #GOOD
+        - lambda: |-
+              if (x > 32767) return (x - 65535) /1;
+                else return (x) /1;
+  value_type: U_WORD
+
+- platform: modbus_controller          # 190 Battery Output Current watt
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Battery-Power"
+  id: sun5k_Battery_Power
+  register_type: holding
+  address: 190
+  unit_of_measurement: "W"
+  accuracy_decimals: 1
+  device_class: power
+  state_class: measurement
+  value_type: S_WORD
+
+- platform: modbus_controller          # 191 Battery Output Current Ampere
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "sun5k-Battery-Current"
+  id: sun5k_Battery_Current
+  register_type: holding
+  address: 191
+  unit_of_measurement: "A"
+  accuracy_decimals: 1
+  device_class: current
+  state_class: measurement
+  value_type: S_WORD

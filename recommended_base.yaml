@@ -1,29 +1,18 @@
 substitutions:
   name: deye
-  device_description: "Modbus Deye SUN-5K-SG03LP1EU Reader"
-  modbus_controller_id: sg03lp1
+  deye_uart_id: sg03lp1_uart
+  deye_uart_rx: GPIO13
+  deye_uart_tx: GPIO14
+  deye_modbus_id: sg03lp1_modbus
+  deye_modbus_controller_id: sg03lp1_modbus_controller
+  sdm230_modbus_id: sdm230_modbus
+  sdm230_uart_id: sdm230_uart
+  sdm230_uart_rx: GPIO21
+  sdm230_uart_tx: GPIO22
+  sdm230_mqtt_topic: solar/sdm230_emulator/data
 
 esphome:
   name: ${name}
-
-# Set pins required for LilyGo T-CAN485 board
-# taken from https://github.com/elupus/esphome-nibe/blob/master/examples/lilygo-t-can485.yaml#L30
-output:
-  - platform: gpio
-    id: ENABLE_PIN # Enable the chip
-    pin:
-      number: GPIO19
-      inverted: true
-  - platform: gpio
-    id: SE_PIN # Enable autodirection
-    pin:
-      number: GPIO17
-      inverted: true
-  - platform: gpio
-    id: ENABLE_5V_PIN # Enable 5V pin for RS485 chip
-    pin:
-      number: GPIO16
-      inverted: true
 
 esp32:
   board: esp32dev
@@ -51,13 +40,29 @@ ota:
 web_server:
   port: 80
 
-# by default data is available via the web interface
-# if you use homeassistant you can uncomment below code:
-#api:
-#  password: !secret api_password
+mqtt:
+  broker: !secret mqtt_broker
 
-# or via MQTT:
-#mqtt:
-#  broker: !secret mqtt_broker
+uart:
+  - id: ${deye_uart_id}
+    rx_pin: ${deye_uart_rx}
+    tx_pin: ${deye_uart_tx}
+    baud_rate: 9600
+    stop_bits: 1
+  - id: ${sdm230_uart_id}
+    rx_pin: ${sdm230_uart_rx}
+    tx_pin: ${sdm230_uart_tx}
+    baud_rate: 9600
+    stop_bits: 1
 
-<<: !include deye.yaml
+modbus:
+  - id: ${deye_modbus_id}
+    uart_id: ${deye_uart_id}
+  - id: ${sdm230_modbus_id}
+    uart_id: ${sdm230_uart_id}
+    role: server
+
+modbus_controller: !include_dir_merge_list modbus_controller/
+
+sensor: !include_dir_merge_list sensor/
+text_sensor: !include_dir_merge_list text_sensor/

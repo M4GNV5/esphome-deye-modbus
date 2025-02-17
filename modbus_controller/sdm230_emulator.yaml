@@ -1,0 +1,41 @@
+
+- modbus_id: ${sdm230_modbus_id}
+  address: 0x1
+  server_registers:
+
+    - address: 0x0000
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_voltage).state;'
+    - address: 0x0006
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_current).state;'
+    - address: 0x000c
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_power).state;'
+    - address: 0x0012
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_voltamps).state;'
+    - address: 0x0018
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_reactivePower).state;'
+    - address: 0x001e
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_powerFactor).state;'
+    - address: 0x0024
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_phaseAngle).state;'
+    - address: 0x0046
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_frequency).state;'
+    - address: 0x0048
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_totalImportKWh).state;'
+    - address: 0x004a
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_totalExportKWh).state;'
+    - address: 0x004c
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_totalImportKVArh).state;'
+    - address: 0x004e
+      value_type: FP32
+      read_lambda: !lambda 'return id(sdm230_totalExportKVArh).state;'

@@ -1,0 +1,5 @@
+  - id: ${deye_modbus_controller_id}
+    address: 0x1
+    modbus_id: ${deye_modbus_id}
+    setup_priority: 1
+    update_interval: 1sec
