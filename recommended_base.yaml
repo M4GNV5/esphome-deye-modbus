@@ -1,15 +1,8 @@
 substitutions:
   name: deye
-  deye_uart_id: sg03lp1_uart
-  deye_uart_rx: GPIO13
-  deye_uart_tx: GPIO14
-  deye_modbus_id: sg03lp1_modbus
-  deye_modbus_controller_id: sg03lp1_modbus_controller
+  deye_modbus_id: deye_modbus
+  deye_modbus_controller_id: deye_modbus_controller
   sdm230_modbus_id: sdm230_modbus
-  sdm230_uart_id: sdm230_uart
-  sdm230_uart_rx: GPIO21
-  sdm230_uart_tx: GPIO22
-  sdm230_mqtt_topic: solar/sdm230_emulator/data
 
 esphome:
   name: ${name}
@@ -44,22 +37,22 @@ mqtt:
   broker: !secret mqtt_broker
 
 uart:
-  - id: ${deye_uart_id}
-    rx_pin: ${deye_uart_rx}
-    tx_pin: ${deye_uart_tx}
+  - id: deye_uart
+    rx_pin: GPIO14
+    tx_pin: GPIO15
     baud_rate: 9600
     stop_bits: 1
-  - id: ${sdm230_uart_id}
-    rx_pin: ${sdm230_uart_rx}
-    tx_pin: ${sdm230_uart_tx}
+  - id: sdm230_uart
+    rx_pin: GPIO21
+    tx_pin: GPIO22
     baud_rate: 9600
     stop_bits: 1
 
 modbus:
   - id: ${deye_modbus_id}
-    uart_id: ${deye_uart_id}
+    uart_id: deye_uart
   - id: ${sdm230_modbus_id}
-    uart_id: ${sdm230_uart_id}
+    uart_id: sdm230_uart
     role: server
 
 modbus_controller: !include_dir_merge_list modbus_controller/
