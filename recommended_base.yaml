@@ -25,6 +25,7 @@ captive_portal:
 
 logger:
   level: INFO
+  baud_rate: 0
 
 ota:
   platform: esphome
@@ -38,13 +39,13 @@ mqtt:
 
 uart:
   - id: deye_uart
-    rx_pin: GPIO14
-    tx_pin: GPIO15
+    rx_pin: GPIO3
+    tx_pin: GPIO1
     baud_rate: 9600
     stop_bits: 1
   - id: sdm230_uart
-    rx_pin: GPIO21
-    tx_pin: GPIO22
+    rx_pin: GPIO16
+    tx_pin: GPIO17
     baud_rate: 9600
     stop_bits: 1
 
