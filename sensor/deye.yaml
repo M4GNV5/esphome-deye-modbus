@@ -1,7 +1,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Warning1"
+  name: "Deye SUN Warning1"
   id:  sun5k_Warning1
   register_type: holding
   address: 101
@@ -10,7 +10,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Warning2"
+  name: "Deye SUN Warning2"
   id:  sun5k_Warning2
   register_type: holding
   address: 102
@@ -19,7 +19,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Fault1"
+  name: "Deye SUN Fault1"
   id:  sun5k_Fault1
   register_type: holding
   address: 103
@@ -28,7 +28,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Fault2"
+  name: "Deye SUN Fault2"
   id:  sun5k_Fault2
   register_type: holding
   address: 104
@@ -37,7 +37,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Fault3"
+  name: "Deye SUN Fault3"
   id:  sun5k_Fault3
   register_type: holding
   address: 105
@@ -46,7 +46,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Fault4"
+  name: "Deye SUN Fault4"
   id:  sun5k_Fault4
   register_type: holding
   address: 106
@@ -57,7 +57,17 @@
 ################################### Leistungsdaten PV1
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-PV1 Power"  # aktuelle Leistung PV
+  name: "Deye SUN AC Power"  # aktuelle AC Output Leistung
+  id: sun5k_AC_Power
+  register_type: holding
+  address: 175
+  state_class: "measurement"
+  unit_of_measurement: "W"
+  value_type: S_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "Deye SUN PV1 Power"  # aktuelle Leistung PV1
   id: sun5k_PV1_Power
   register_type: holding
   address: 186
@@ -67,7 +77,17 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-daily-production" # leistung PV HEUTE in watt
+  name: "Deye SUN PV2 Power"  # aktuelle Leistung PV2
+  id: sun5k_PV2_Power
+  register_type: holding
+  address: 187
+  state_class: "measurement"
+  unit_of_measurement: "W"
+  value_type: U_WORD
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "Deye SUN Today PV Production" # leistung PV HEUTE in watt
   id: sun5k_daily_production
   register_type: holding
   address: 108
@@ -80,7 +100,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-PV1 Voltage" # aktuelle volt PV1
+  name: "Deye SUN PV1 Voltage" # aktuelle volt PV1
   id: sun5k_PV1_Voltage
   register_type: holding
   address: 109
@@ -93,7 +113,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-PV1 Current" # aktuelle A PV1
+  name: "Deye SUN PV1 Current" # aktuelle A PV1
   id: sun5k_PV1_Current
   register_type: holding
   address: 110
@@ -106,7 +126,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-PV2 Voltage" # aktuelle volt PV2
+  name: "Deye SUN PV2 Voltage" # aktuelle volt PV2
   id: sun5k_PV2_Voltage
   register_type: holding
   address: 111
@@ -119,7 +139,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-PV2 Current" # aktuelle A PV2
+  name: "Deye SUN PV2 Current" # aktuelle A PV2
   id: sun5k_PV2_Current
   register_type: holding
   address: 112
@@ -132,7 +152,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Total PV Production"
+  name: "Deye SUN Total PV Production"
   id: sun5k_Total_PV_Production
   register_type: holding
   address: 96
@@ -145,7 +165,7 @@
 
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Radiator Temperature"
+  name: "Deye SUN Radiator Temperature"
   id: sun5k_Radiator_Temperature
   register_type: holding
   address: 90
@@ -154,6 +174,7 @@
   accuracy_decimals: 1
   filters:
     - multiply: 0.1
+    - offset: -100
   value_type: U_WORD
 
 ######################Ende PV Sensoren###########################################
@@ -161,7 +182,7 @@
 ################################ Batterie aktuelle Werte
 - platform: modbus_controller          # 183 Battery Spannung
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Battery-Temperature"
+  name: "Deye SUN Battery-Temperature"
   id: sun5k_Battery_Temperature
   register_type: holding
   address: 182
@@ -169,13 +190,14 @@
   accuracy_decimals: 1
   filters:
     - multiply: 0.1
+    - offset: -100
   device_class: voltage
   state_class: measurement
   value_type: U_WORD
 
 - platform: modbus_controller          # 183 Battery Spannung
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Battery-Voltage"
+  name: "Deye SUN Battery-Voltage"
   id: sun5k_Battery_Voltage
   register_type: holding
   address: 183
@@ -189,7 +211,7 @@
 
 - platform: modbus_controller          # 184 Battery SOC
   modbus_controller_id:  ${deye_modbus_controller_id}
-  name: "sun5k-Battery-SoC"  #Batterie SoC
+  name: "Deye SUN Battery-SoC"  #Batterie SoC
   id: sun5k_Battery_SoC
   register_type: holding
   address: 184
@@ -197,15 +219,11 @@
   #accuracy_decimals: 0
   device_class: battery
   state_class: measurement
-  filters: #GOOD
-        - lambda: |-
-              if (x > 32767) return (x - 65535) /1;
-                else return (x) /1;
   value_type: U_WORD
 
 - platform: modbus_controller          # 190 Battery Output Current watt
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Battery-Power"
+  name: "Deye SUN Battery-Power"
   id: sun5k_Battery_Power
   register_type: holding
   address: 190
@@ -217,12 +235,14 @@
 
 - platform: modbus_controller          # 191 Battery Output Current Ampere
   modbus_controller_id: ${deye_modbus_controller_id}
-  name: "sun5k-Battery-Current"
+  name: "Deye SUN Battery-Current"
   id: sun5k_Battery_Current
   register_type: holding
   address: 191
   unit_of_measurement: "A"
-  accuracy_decimals: 1
+  accuracy_decimals: 2
+  filters:
+    - multiply: 0.01
   device_class: current
   state_class: measurement
   value_type: S_WORD
