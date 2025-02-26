@@ -4,12 +4,11 @@ The goal of this project is to interface with my solar inverter and:
 - read solar inverter metadata
 - emulate a SDM230/SDM630 energy meter
 
-I use a Deye SG03LP1, which is a single phase 5kW hybrid solar inverter with 48V pylontech battery compatible inverter.
-It might work for other models aswell.
-However some sources say the three phase Deye inverters are different and might not work.
+I use a Deye SG03LP1, which is a single phase 5kW hybrid solar inverter which is compatible to 48V pylontech batteries.
+It might work for other models aswell, however some sources say the three phase Deye inverters are different and might not work.
 Feel free to add a mention of your model if you successfuly tested this code with it.
 
-I also emulate the power registers of an Eastron SDM630 energy meter, feeding it with data from [SML data from my EVU meter](https://github.com/M4GNV5/esphome-smart-meter-reader).
+I also emulate the power registers of an Eastron SDM630 energy meter, feeding it with [SML data from my EVU meter](https://github.com/M4GNV5/esphome-smart-meter-reader).
 This allows to use the inverter zero export functionality.
 
 For reading data I juse the RJ45 pins 1 (B), 2 (A) and 3 (GND) of the "BMS485/CAN" port (top middle) of the 5 RJ45 ports located inside the inverter.
