@@ -2,4 +2,4 @@
   address: 0x1
   modbus_id: ${deye_modbus_id}
   setup_priority: 1
-  update_interval: 10sec
+  update_interval: 100ms
