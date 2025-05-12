@@ -59,8 +59,35 @@
   value_type: U_WORD
   skip_updates: 100
 
-################################### PV
-################################### Leistungsdaten PV1
+################################### Leistungsdaten AC
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "Deye SUN AC Voltage"  # aktuelle AC Spannung
+  id: sun5k_AC_Voltage
+  register_type: holding
+  address: 150
+  state_class: "measurement"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  unit_of_measurement: "V"
+  value_type: U_WORD
+  skip_updates: 10
+
+- platform: modbus_controller
+  modbus_controller_id: ${deye_modbus_controller_id}
+  name: "Deye SUN AC Current"  # aktueller AC Strom
+  id: sun5k_AC_Current
+  register_type: holding
+  address: 160
+  state_class: "measurement"
+  accuracy_decimals: 2
+  filters:
+    - multiply: 0.01
+  unit_of_measurement: "A"
+  value_type: S_WORD
+  skip_updates: 10
+
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
   name: "Deye SUN AC Power"  # aktuelle AC Output Leistung
@@ -72,6 +99,7 @@
   value_type: S_WORD
   skip_updates: 10
 
+################################### Leistungsdaten PV
 - platform: modbus_controller
   modbus_controller_id: ${deye_modbus_controller_id}
   name: "Deye SUN PV1 Power"  # aktuelle Leistung PV1
